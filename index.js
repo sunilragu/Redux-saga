@@ -1,28 +1,6 @@
-import React from 'react';
-import createSagaMiddleware from 'redux-saga';
-import { render } from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-// import { logger } from 'redux-logger';
-import reducer from './store/reducers';
-import App from './App';
-import rootSaga from './sagas';
+export const fetchNews =async ()=> {
 
-const sagaMiddleware = createSagaMiddleware();
-
-const store = createStore(
-  reducer, applyMiddleware(sagaMiddleware)
-);
-
-sagaMiddleware.run(rootSaga);
-
-
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root'),
-);
-
-
-
+  const response = await fetch('https://newsapi.org/v1/articles?source=cnn&apiKey=c39a26d9c12f48dba2a5c00e35684ecc');
+  return await response.json();
+ 
+}
